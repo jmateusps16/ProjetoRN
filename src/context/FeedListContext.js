@@ -4,8 +4,8 @@ const feedListReducer = (state, action) => {
     let newState = [];
     switch (action.type) {
         case 'add_feed':
-            console.log('implementar');
-            return state;
+            console.log('No Add Feed');
+            return [...state, action.payload];
         case 'delete_feed':
             console.log('implementar');
             return state;
@@ -20,11 +20,25 @@ const feedListReducer = (state, action) => {
     }
 };
 
-const addFeed = dispatch => {
+const addFeed = (dispatch) => {
     return (titulo, urlFeed, callback) => {
-        console.log('implementar');
+        const newFeed = {
+            titulo,
+            urlFeed,
+            descricao: '',
+            urlSite: '',
+            urlImagem: '',
+        };
+
+        dispatch({ type: 'add_feed', payload: newFeed });
+
+        // Chame o callback, se necessário
+        if (callback) {
+            callback();
+        }
     };
 };
+
 
 const deleteFeed = dispatch => {
     return (id) => {
@@ -73,7 +87,7 @@ const rssFeeds = [
         urlSite: '',
         urlImagem: ''
     }
-    
+
 ];
 
 export const { Context, Provider } = createDataContext(
