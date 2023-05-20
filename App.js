@@ -1,45 +1,20 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { TouchableOpacity } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Provider as FeedProvider } from './src/context/FeedContext';
 import IndexScreen from './src/screens/IndexScreen';
-import ShowFeedScreen from './src/screens/ShowFeedScreen';
 import AddFeedScreen from './src/screens/AddFeedScreen';
-import { Feather } from '@expo/vector-icons';
-import { Provider as FeedListProvider } from './src/context/FeedListContext';
-import { useContext } from 'react';
-import { Context as FeedListContext } from './src/context/FeedListContext';
+import ShowFeedScreen from './src/screens/ShowFeedScreen';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const App = () => {
-  const { addFeed } = useContext(FeedListContext);
-
-  const handleAddFeed = (titulo, urlFeed, descricao, urlSite, urlImagem) => {
-    addFeed(titulo, urlFeed, descricao, urlSite, urlImagem, () => {
-      // Lógica a ser executada após adicionar o feed (se necessário)
-      navigation.navigate('Index');
-    });
-  };
-
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Index'>
-        <Stack.Screen 
-          name="Index" 
-          component={IndexScreen} 
-          options={({ navigation }) => ({
-            headerRight: () => (
-              <TouchableOpacity onPress={() => navigation.navigate('Add')}>
-                <Feather name="plus" size={30} />
-              </TouchableOpacity>
-            )
-          })}
-        />
-        <Stack.Screen name="Show" component={ShowFeedScreen} />
-        <Stack.Screen name="Add">
-          {() => <AddFeedScreen onAddFeed={handleAddFeed} />}
-        </Stack.Screen>
+      <Stack.Navigator>
+        <Stack.Screen name="Feeds" component={IndexScreen} />
+        <Stack.Screen name="Add" component={AddFeedScreen} />
+        <Stack.Screen name="ShowFeed" component={ShowFeedScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -47,8 +22,8 @@ const App = () => {
 
 export default () => {
   return (
-    <FeedListProvider>
+    <FeedProvider>
       <App />
-    </FeedListProvider>
+    </FeedProvider>
   );
 };
