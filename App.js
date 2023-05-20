@@ -18,6 +18,7 @@ const App = () => {
   const handleAddFeed = (titulo, urlFeed, descricao, urlSite, urlImagem) => {
     addFeed(titulo, urlFeed, descricao, urlSite, urlImagem, () => {
       // Lógica a ser executada após adicionar o feed (se necessário)
+      navigation.navigate('Index');
     });
   };
 

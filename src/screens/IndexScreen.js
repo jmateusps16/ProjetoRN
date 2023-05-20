@@ -5,52 +5,52 @@ import { useContext } from 'react';
 import { Context as FeedListContext } from '../context/FeedListContext';
 
 const IndexScreen = ({ navigation }) => {
-    const { state, deleteFeed } = useContext(FeedListContext);
-    // com o addFeed
-    // const { state, addFeed, deleteFeed } = useContext(FeedListContext);
+  const { state, deleteFeed } = useContext(FeedListContext);
 
-    // Teste para ver se funcionou o add
-    // const handleAddFeed = () => {
-    //     addFeed('Novo Feed', 'https://exemplo.com/feed');
-    //   };
+  const handleDeleteFeed = id => {
+    deleteFeed(id);
+  };
 
-    const handleDeleteFeed = id => {
-        deleteFeed(id);
-    };
+  const handleOpenFeed = item => {
+    navigation.navigate('Show', { feedTitle: item.titulo, feedUrl: item.urlFeed });
+  };
 
-    return (
-        <View>
-            <FlatList
-                data={state}
-                keyExtractor={feed => feed.id}
-                renderItem={({ item }) => (
-                    <View style={styles.row}>
-                        <Text style={styles.title}>{item.titulo}</Text>
-                        <TouchableOpacity onPress={() => handleDeleteFeed(item.id)}>
-                            <Feather name="trash" style={styles.icon} />
-                        </TouchableOpacity>
-                    </View>
-                )}
-            />
-        </View>
-    );
+  return (
+    <View>
+      <FlatList
+        data={state}
+        keyExtractor={feed => feed.id}
+        renderItem={({ item }) => (
+          <View style={styles.row}>
+            <TouchableOpacity onPress={() => handleOpenFeed(item)}>
+              <Text style={styles.title}>{item.titulo}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleDeleteFeed(item.id)}>
+              <Feather name="trash" style={styles.icon} />
+            </TouchableOpacity>
+          </View>
+        )}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    row: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingVertical: 20,
-        paddingHorizontal: 10,
-        borderTopWidth: 1,
-        borderColor: 'gray',
-    },
-    title: {
-        fontSize: 18,
-    },
-    icon: {
-        fontSize: 24,
-    },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderTopWidth: 1,
+    borderColor: 'gray',
+  },
+  title: {
+    fontSize: 18,
+    color: 'blue',
+  },
+  icon: {
+    fontSize: 24,
+  },
 });
 
 export default IndexScreen;
