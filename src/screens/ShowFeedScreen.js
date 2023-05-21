@@ -1,98 +1,70 @@
 import React, { useContext } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import { Context as FeedListContext } from '../context/FeedListContext';
 
 const ShowFeedScreen = ({ route }) => {
-  const { id } = route.params;
   const { state } = useContext(FeedListContext);
+  const { id } = route.params;
+
   const feed = state.find((feed) => feed.id === id);
 
   return (
-    <View style={{ padding: 16 }}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 8 }}>
-        Título: {feed.titulo}
-      </Text>
-      <Text style={{ fontSize: 16, marginBottom: 8 }}>
-        Descrição: {feed.descricao}
-      </Text>
-      <Text style={{ fontSize: 14 }}>URL do Feed: {feed.urlFeed}</Text>
-      <Text style={{ fontSize: 14 }}>URL do Site: {feed.urlSite}</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Título: {feed.titulo}</Text>
+      <Text style={styles.description}>Descrição: {feed.descricao}</Text>
+      <Text style={styles.feedUrl}>URL do Feed: {feed.urlFeed}</Text>
+      <Text style={styles.siteUrl}>URL do Site: {feed.urlSite}</Text>
+
+      <Button title="Editar Feed" onPress={() => {}} />
+
+      <Text style={styles.sectionTitle}>Itens:</Text>
+      {feed.items.map((item) => (
+        <View key={item.id} style={styles.itemContainer}>
+          <Text style={styles.itemTitle}>{item.titulo}</Text>
+          <Text style={styles.itemDescription}>{item.descricao}</Text>
+        </View>
+      ))}
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  description: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  feedUrl: {
+    fontSize: 14,
+  },
+  siteUrl: {
+    fontSize: 14,
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  itemContainer: {
+    marginBottom: 16,
+  },
+  itemTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  itemDescription: {
+    fontSize: 14,
+  },
+});
+
 export default ShowFeedScreen;
-
-// import React from 'react';
-// import { View, Text, StyleSheet, Button, Image } from 'react-native';
-// import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-// import { Context as FeedListContext } from '../context/FeedListContext'
-// import { Context as FeedContext } from '../context/FeedContext'
-// import { useContext } from 'react';
-
-
-// const ShowFeedScreen = ({ route, navigation }) => {
-//     const feedListContext = useContext(FeedListContext);
-//     const feedID = route.params.id;
-//     console.log(feedID);
-//     const feed = feedListContext.state.find((feed) => feed.urlFeed === feedID);
-//     const { state, fetchItems } = useContext(FeedContext);
-//     fetchItems(feed.urlFeed);
-
-//     const abrirLink = (link) => {
-//         console.log('implementar, mandar o usuário para o link da notícia (item.link)');
-//     }
-
-//     return (
-//         <>
-//             <FlatList
-//                 data={state}
-//                 keyExtractor={(item) => item.link}
-//                 renderItem={({ item }) => {
-//                     //atualmente só exibe o título, faça com que apareça data de publicação, descrição (pode cortar em 100 ou 200 caracteres para não ficar muito grande), e imagem (caso tenha)
-//                     //ao clicar em uma notícia, devemos chamar a função abrirLink que direciona o usuário para o link da notícia
-//                     return (
-//                         <View style={styles.row}>
-//                             <Text style={styles.titulo}>{item.titulo}</Text>
-//                         </View>
-//                     );
-//                 }}
-//             />
-//         </>
-//     );
-// };
-
-// //altere os estilos como desejar para melhorar o layout
-// const styles = StyleSheet.create({
-//     row: {
-//         flexDirection: 'row',
-//         justifyContent: 'space-between',
-//         paddingVertical: 20,
-//         paddingHorizontal: 10,
-//         borderTopWidth: 1,
-//         borderColor: 'gray'
-//     },
-//     titulo: {
-//         fontSize: 14,
-//         fontWeight: 'bold'
-//     },
-//     image: {
-//         //pode alterar largura e altura como desejar
-//         width: 100,
-//         height: 100,
-//         borderRadius: 4,
-//         margin: 5
-//     },
-//     descricao: {
-//         fontSize: 8
-//     },
-//     dataPublicacao: {
-//         fontSize: 10,
-//         fontStyle: 'italic'
-//     },
-//     icon: {
-//         fontSize: 24
-//     }
-// });
-
-// export default ShowFeedScreen;
