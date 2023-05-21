@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, ScrollView, StyleSheet } from 'react-native';
 import { Context as FeedListContext } from '../context/FeedListContext';
 
 const ShowFeedScreen = ({ route }) => {
@@ -9,7 +9,7 @@ const ShowFeedScreen = ({ route }) => {
   const feed = state.find((feed) => feed.id === id);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>Título: {feed.titulo}</Text>
       <Text style={styles.description}>Descrição: {feed.descricao}</Text>
       <Text style={styles.feedUrl}>URL do Feed: {feed.urlFeed}</Text>
@@ -24,7 +24,7 @@ const ShowFeedScreen = ({ route }) => {
           <Text style={styles.itemDescription}>{item.descricao}</Text>
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
