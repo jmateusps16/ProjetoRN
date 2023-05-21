@@ -1,34 +1,38 @@
 import React, { useContext } from 'react';
 import { Button, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { Context as FeedContext } from '../context/FeedContext';
+import { Feather } from '@expo/vector-icons';
 
 const IndexScreen = ({ navigation }) => {
-  const { state } = useContext(FeedContext);
+  const { state, deleteFeed } = useContext(FeedContext);
+  
+  const handleDeleteFeed = id => { deleteFeed(id); };
 
   return (
     <View>
       <FlatList
         data={state}
         keyExtractor={(feed) => feed.id}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('ShowFeed', { id: item.id })
-              }
-            >
-              <View style={{ padding: 16 }}>
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ShowFeed', { id: item.id })}
+          >
+            <View style={{ flexDirection: 'row', padding: 16 }}>
+              <View style={{ flex: 1 }}>
                 <Text style={{ fontSize: 18 }}>{item.titulo}</Text>
                 <Text>{item.descricao}</Text>
               </View>
-            </TouchableOpacity>
-          );
-        }}
+              <TouchableOpacity
+                onPress={() => handleDeleteFeed(item.id)}
+                style={{ marginLeft: 10 }}
+              >
+                <Feather name="trash" style={{ fontSize: 24 }} />
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        )}
       />
-      <Button
-        title="Adicionar Feed"
-        onPress={() => navigation.navigate('Add')}
-      />
+      <Button title="Adicionar Feed" onPress={() => navigation.navigate('Add')} />
     </View>
   );
 };
