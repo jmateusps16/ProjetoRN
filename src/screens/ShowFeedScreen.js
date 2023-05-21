@@ -17,11 +17,12 @@ const ShowFeedScreen = ({ route }) => {
 
       <Button title="Editar Feed" onPress={() => {}} />
 
-      <Text style={styles.sectionTitle}>Itens:</Text>
+      <Text style={styles.sectionTitle}>Noticias:</Text>
       {feed.items.map((item) => (
         <View key={item.id} style={styles.itemContainer}>
           <Text style={styles.itemTitle}>{item.titulo}</Text>
           <Text style={styles.itemDescription}>{item.descricao}</Text>
+          <Text style={styles.itemDescription}>{item.dataPublicacao}</Text>
         </View>
       ))}
     </ScrollView>
