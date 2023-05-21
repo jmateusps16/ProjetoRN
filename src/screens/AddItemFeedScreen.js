@@ -37,7 +37,7 @@ const AddItemFeedScreen = ({ route, navigation }) => {
                 style={styles.input}
                 value={titulo}
                 onChangeText={setTitulo}
-                placeholder="Digite o título do item"
+                placeholder="Digite o título da Notícia"
             />
 
             <Text style={styles.label}>Descrição: *</Text>
@@ -45,7 +45,7 @@ const AddItemFeedScreen = ({ route, navigation }) => {
                 style={styles.input}
                 value={descricao}
                 onChangeText={setDescricao}
-                placeholder="Digite a descrição do item"
+                placeholder="Digite a descrição da Notícia"
             />
 
             <Text style={styles.label}>Link: *</Text>
@@ -53,10 +53,10 @@ const AddItemFeedScreen = ({ route, navigation }) => {
                 style={styles.input}
                 value={link}
                 onChangeText={setLink}
-                placeholder="Digite a Link do item"
+                placeholder="Digite a Link da Notícia"
             />
 
-            <Button title="Adicionar Item" onPress={handleSubmit} />
+            <Button title="Adicionar Notícia" onPress={handleSubmit} />
         </View>
     );
 };

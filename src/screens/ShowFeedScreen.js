@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, Button, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert } from 'react-native';
 import { Context as FeedListContext } from '../context/FeedListContext';
 import { Context as FeedContext } from '../context/FeedContext';
 
@@ -21,6 +21,15 @@ const ShowFeedScreen = ({ route, navigation }) => {
     navigation.navigate('AddItemFeed', { id });
   };
 
+  const handleOpenLink = async (link) => {
+    const supported = await Linking.canOpenURL(link);
+    if (supported) {
+      await Linking.openURL(link);
+    } else {
+      Alert.alert('Erro', 'Não é possível abrir o link.');
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Título: {feed.titulo}</Text>
@@ -31,12 +40,17 @@ const ShowFeedScreen = ({ route, navigation }) => {
       {items.map((item) => (
         <View key={item.id} style={styles.itemContainer}>
           <Text style={styles.itemTitle}>{item.titulo}</Text>
-          <Text style={styles.itemDescription}>{item.descricao}</Text>
+          <Text
+            style={styles.itemDescription}
+            onPress={() => handleOpenLink(item.link)}
+          >
+            {item.descricao}
+          </Text>
           <Text style={styles.itemDescription}>{item.dataPublicacao}</Text>
         </View>
       ))}
       {feed && (
-        <Button title="Adicionar Item" onPress={AddItemFeed} />
+        <Button title="Adicionar Notícia" onPress={AddItemFeed} />
       )}
     </ScrollView>
   );
