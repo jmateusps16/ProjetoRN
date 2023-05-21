@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { Context as FeedContext } from '../context/FeedContext';
+import { Context as FeedListContext } from '../context/FeedListContext';
 
 const AddFeedScreen = ({ navigation }) => {
   const [titulo, setTitulo] = useState('');
@@ -8,7 +8,7 @@ const AddFeedScreen = ({ navigation }) => {
   const [descricao, setDescricao] = useState('');
   const [urlSite, setUrlSite] = useState('');
   const [urlImagem, setUrlImagem] = useState('');
-  const { addFeed } = useContext(FeedContext);
+  const { addFeed } = useContext(FeedListContext);
 
   const onSubmit = () => {
     if (titulo && urlFeed && descricao) {

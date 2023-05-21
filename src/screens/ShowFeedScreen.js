@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
-import { Context as FeedContext } from '../context/FeedContext';
+import { Context as FeedListContext } from '../context/FeedListContext';
 
 const ShowFeedScreen = ({ route }) => {
   const { id } = route.params;
-  const { state } = useContext(FeedContext);
+  const { state } = useContext(FeedListContext);
   const feed = state.find((feed) => feed.id === id);
 
   return (

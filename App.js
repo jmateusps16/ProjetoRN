@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Provider as FeedProvider } from './src/context/FeedContext';
+import { Provider as FeedProvider } from './src/context/FeedListContext';
 import IndexScreen from './src/screens/IndexScreen';
 import AddFeedScreen from './src/screens/AddFeedScreen';
 import ShowFeedScreen from './src/screens/ShowFeedScreen';

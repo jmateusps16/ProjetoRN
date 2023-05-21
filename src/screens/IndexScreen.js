@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { Button, View, Text, FlatList, TouchableOpacity } from 'react-native';
-import { Context as FeedContext } from '../context/FeedContext';
+import { Context as FeedListContext } from '../context/FeedListContext';
 import { Feather } from '@expo/vector-icons';
 
 const IndexScreen = ({ navigation }) => {
-  const { state, deleteFeed } = useContext(FeedContext);
+  const { state, deleteFeed } = useContext(FeedListContext);
   
   const handleDeleteFeed = id => { deleteFeed(id); };
 
