@@ -26,10 +26,15 @@ const feedReducer = (state, action) => {
     }
 };
 
-const addItem = dispatch => {
-    return (titulo, urlFeed, callback) => {
-        console.log('implementar');
+const addItem = (id, item) => {
+  const feed = state.find((feed) => feed.id === id);
+  if (feed) {
+    const updatedFeed = {
+      ...feed,
+      items: [...feed.items, item],
     };
+    dispatch({ type: 'UPDATE_FEED', payload: updatedFeed });
+  }
 };
 
 const deleteItem = dispatch => {

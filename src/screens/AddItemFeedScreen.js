@@ -1,12 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { Context as FeedListContext } from '../context/FeedListContext';
+import { Context as FeedContext } from '../context/FeedContext';
 
 const AddItemFeedScreen = ({ route, navigation }) => {
   const { id } = route.params;
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
   const { state, dispatch } = useContext(FeedListContext);
+  const { addItem } = useContext(FeedContext);
 
   const onSubmit = () => {
     if (titulo && descricao) {
@@ -21,7 +23,7 @@ const AddItemFeedScreen = ({ route, navigation }) => {
         const updatedFeed = { ...state[feedIndex] };
         updatedFeed.items.push(newItem);
 
-        dispatch({ type: 'update_feed', payload: updatedFeed });
+        addItem(id, newItem);
         navigation.goBack();
       } else {
         alert('Feed não encontrado.');

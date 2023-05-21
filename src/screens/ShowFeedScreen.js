@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, Button, ScrollView, StyleSheet } from 'react-native';
 import { Context as FeedListContext } from '../context/FeedListContext';
-import AddItemFeedScreen from './AddItemFeedScreen';
 
 const ShowFeedScreen = ({ route, navigation }) => {
   const { state } = useContext(FeedListContext);
@@ -9,7 +8,7 @@ const ShowFeedScreen = ({ route, navigation }) => {
 
   const feed = state.find((feed) => feed.id === id);
 
-  const addItem = () => {
+  const AddItemFeed = () => {
     navigation.navigate('AddItemFeed', { id });
   };
 
@@ -28,7 +27,7 @@ const ShowFeedScreen = ({ route, navigation }) => {
         </View>
       ))}
       {feed && (
-        <Button title="Adicionar Item" onPress={addItem} />
+        <Button title="Adicionar Item" onPress={AddItemFeed} />
       )}
     </ScrollView>
   );
