@@ -24,7 +24,7 @@ const feedReducer = (state, action) => {
   }
 };
 
-const addItem = (dispatch) => (id, item) => {
+const addItem = (dispatch) => (state, id, item) => {
   const feed = state.find((feed) => feed.id === id);
   if (feed) {
     const updatedFeed = {

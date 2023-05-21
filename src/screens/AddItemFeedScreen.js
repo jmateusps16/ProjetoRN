@@ -1,16 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { Context as FeedListContext } from '../context/FeedListContext';
 import { Context as FeedContext } from '../context/FeedContext';
 
 const AddItemFeedScreen = ({ route, navigation }) => {
   const { id } = route.params;
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
-  const { state, dispatch } = useContext(FeedListContext);
   const { addItem } = useContext(FeedContext);
 
-  const onSubmit = () => {
+  const handleSubmit = () => {
     if (titulo && descricao) {
       const newItem = {
         id: Math.random().toString(),
@@ -18,16 +16,8 @@ const AddItemFeedScreen = ({ route, navigation }) => {
         descricao,
       };
 
-      const feedIndex = state.findIndex((feed) => feed.id === id);
-      if (feedIndex !== -1) {
-        const updatedFeed = { ...state[feedIndex] };
-        updatedFeed.items.push(newItem);
-
-        addItem(id, newItem);
-        navigation.goBack();
-      } else {
-        alert('Feed não encontrado.');
-      }
+      addItem(id, newItem);
+      navigation.goBack();
 
       setTitulo('');
       setDescricao('');
@@ -54,7 +44,7 @@ const AddItemFeedScreen = ({ route, navigation }) => {
         placeholder="Digite a descrição do item"
       />
 
-      <Button title="Adicionar Item" onPress={onSubmit} />
+      <Button title="Adicionar Item" onPress={handleSubmit} />
     </View>
   );
 };
