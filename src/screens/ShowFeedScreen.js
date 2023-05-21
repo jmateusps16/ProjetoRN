@@ -1,12 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, Button, ScrollView, StyleSheet } from 'react-native';
 import { Context as FeedListContext } from '../context/FeedListContext';
+import { Context as FeedContext } from '../context/FeedContext';
 
 const ShowFeedScreen = ({ route, navigation }) => {
-  const { state } = useContext(FeedListContext);
+  const { state: feedListState } = useContext(FeedListContext);
+  const { state: feedState } = useContext(FeedContext);
   const { id } = route.params;
 
-  const feed = state.find((feed) => feed.id === id);
+  const feed = feedListState.find((feed) => feed.id === id);
+  const items = feedState[id] ? feedState[id].items : [];
+
+  const { fetchItems } = useContext(FeedContext);
+
+  useEffect(() => {
+    fetchItems(feed.urlFeed);
+  }, []);
 
   const AddItemFeed = () => {
     navigation.navigate('AddItemFeed', { id });
@@ -18,8 +27,8 @@ const ShowFeedScreen = ({ route, navigation }) => {
       <Text style={styles.description}>Descrição: {feed.descricao}</Text>
       <Text style={styles.feedUrl}>URL do Feed: {feed.urlFeed}</Text>
       <Text style={styles.siteUrl}>URL do Site: {feed.urlSite}</Text>
-      <Text style={styles.sectionTitle}>Noticias:</Text>
-      {feed.items.map((item) => (
+      <Text style={styles.sectionTitle}>Notícias:</Text>
+      {items.map((item) => (
         <View key={item.id} style={styles.itemContainer}>
           <Text style={styles.itemTitle}>{item.titulo}</Text>
           <Text style={styles.itemDescription}>{item.descricao}</Text>
