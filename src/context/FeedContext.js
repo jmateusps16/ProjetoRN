@@ -11,7 +11,7 @@ const feedReducer = (state, action) => {
         ...state,
         [feedId]: {
           ...state[feedId],
-          items: [...state[feedId].items, item],
+          items: [...(state[feedId]?.items || []), item],
         },
       };
     case 'delete_item':
