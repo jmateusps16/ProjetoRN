@@ -15,8 +15,16 @@ const feedReducer = (state, action) => {
         },
       };
     case 'delete_item':
-      console.log('implementar');
-      return state;
+      const { id, itemId } = action.payload;
+      const feed = state[id];
+      const updatedItems = feed.items.filter((item) => item.id !== itemId);
+      return {
+        ...state,
+        [id]: {
+          ...feed,
+          items: updatedItems,
+        },
+      };
     case 'restore_state':
       console.log('implementar');
       return state;

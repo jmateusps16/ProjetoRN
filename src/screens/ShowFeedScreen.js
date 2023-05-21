@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert } from 'react-native';
+import { View, Text, Button, ScrollView, StyleSheet, Linking, Alert, TouchableOpacity } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import { Context as FeedListContext } from '../context/FeedListContext';
 import { Context as FeedContext } from '../context/FeedContext';
 
 const ShowFeedScreen = ({ route, navigation }) => {
   const { state: feedListState } = useContext(FeedListContext);
-  const { state: feedState } = useContext(FeedContext);
+  const { state: feedState, deleteItem } = useContext(FeedContext);
   const { id } = route.params;
 
   const feed = feedListState.find((feed) => feed.id === id);
@@ -30,6 +31,10 @@ const ShowFeedScreen = ({ route, navigation }) => {
     }
   };
 
+  const handleDeleteItem = (itemId) => {
+    deleteItem(id, itemId);
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Título: {feed.titulo}</Text>
@@ -47,6 +52,12 @@ const ShowFeedScreen = ({ route, navigation }) => {
             {item.descricao}
           </Text>
           <Text style={styles.itemDescription}>{item.dataPublicacao}</Text>
+          <TouchableOpacity
+            onPress={() => handleDeleteItem(item.id)}
+            style={{ marginLeft: 10 }}
+          >
+            <Feather name="trash" style={{ fontSize: 24 }} />
+          </TouchableOpacity>
         </View>
       ))}
       {feed && (
