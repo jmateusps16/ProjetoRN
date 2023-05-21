@@ -5,7 +5,7 @@ const feedListReducer = (state, action) => {
     case 'add_feed':
       return [...state, action.payload];
     case 'delete_feed':
-      return state.filter(feed => feed.id !== action.payload);
+        return state.filter((feed) => feed.id !== action.payload);
     default:
       return state;
   }

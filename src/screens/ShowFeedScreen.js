@@ -16,6 +16,7 @@ const ShowFeedScreen = ({ route }) => {
         Descrição: {feed.descricao}
       </Text>
       <Text style={{ fontSize: 14 }}>URL do Feed: {feed.urlFeed}</Text>
+      <Text style={{ fontSize: 14 }}>URL do Site: {feed.urlSite}</Text>
     </View>
   );
 };

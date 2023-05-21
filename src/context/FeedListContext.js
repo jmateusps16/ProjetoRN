@@ -8,7 +8,7 @@ const feedListReducer = (state, action) => {
             return [...state, action.payload];
         case 'delete_feed':
             console.log('No Remove Feed');
-            return state.filter(feed => feed.id !== action.payload);
+            return state.filter((feed) => feed.id !== action.payload);
         case 'restore_state':
             console.log('implementar');
             return state;

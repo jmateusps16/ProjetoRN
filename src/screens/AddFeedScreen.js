@@ -6,6 +6,8 @@ const AddFeedScreen = ({ navigation }) => {
   const [titulo, setTitulo] = useState('');
   const [urlFeed, setUrlFeed] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [urlSite, setUrlSite] = useState('');
+  const [urlImagem, setUrlImagem] = useState('');
   const { addFeed } = useContext(FeedContext);
 
   const onSubmit = () => {
@@ -15,6 +17,8 @@ const AddFeedScreen = ({ navigation }) => {
         titulo,
         urlFeed,
         descricao,
+        urlSite: urlSite ? urlSite : 'N/A',
+        urlImagem: urlImagem ? urlImagem : 'N/A',
       };
 
       addFeed(newFeed);
@@ -22,6 +26,8 @@ const AddFeedScreen = ({ navigation }) => {
       setTitulo('');
       setUrlFeed('');
       setDescricao('');
+      setUrlSite('');
+      setUrlImagem('');
 
       alert('Feed adicionado com sucesso!');
     } else {
@@ -53,6 +59,22 @@ const AddFeedScreen = ({ navigation }) => {
         value={descricao}
         onChangeText={setDescricao}
         placeholder="Digite a descrição do feed"
+      />
+
+      <Text style={styles.label}>URL Site:</Text>
+      <TextInput
+        style={styles.input}
+        value={urlSite}
+        onChangeText={setUrlSite}
+        placeholder="Digite a URL do Site do feed"
+      />
+
+      <Text style={styles.label}>URL Imagem:</Text>
+      <TextInput
+        style={styles.input}
+        value={urlImagem}
+        onChangeText={setUrlImagem}
+        placeholder="Digite a Imagemdo feed"
       />
 
       <Button title="Adicionar Feed" onPress={onSubmit} />
