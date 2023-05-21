@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { Context as FeedContext } from '../context/FeedContext';
 
+//criei para auxiliar a adição de noticias ao feed.
 const AddItemFeedScreen = ({ route, navigation }) => {
     const { id } = route.params;
     const [titulo, setTitulo] = useState('');

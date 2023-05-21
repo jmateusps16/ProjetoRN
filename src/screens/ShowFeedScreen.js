@@ -4,6 +4,8 @@ import { Feather } from '@expo/vector-icons';
 import { Context as FeedListContext } from '../context/FeedListContext';
 import { Context as FeedContext } from '../context/FeedContext';
 
+//aqui utilizo o useEffect para montar as informações iniciais com o itens do Feed que foi selecionado.
+// adicionei também um botão para remover o item que foi adicionado e também um botão para adicionar um novo "item" noticia
 const ShowFeedScreen = ({ route, navigation }) => {
   const { state: feedListState } = useContext(FeedListContext);
   const { state: feedState, deleteItem } = useContext(FeedContext);
@@ -22,6 +24,7 @@ const ShowFeedScreen = ({ route, navigation }) => {
     navigation.navigate('AddItemFeed', { id });
   };
 
+  //aqui ele deve chamar para abrir a URL (tem que ser válida) no navegador padrão do celular
   const handleOpenLink = async (link) => {
     const supported = await Linking.canOpenURL(link);
     if (supported) {
@@ -35,6 +38,7 @@ const ShowFeedScreen = ({ route, navigation }) => {
     deleteItem(id, itemId);
   };
 
+  //aqui retorno o feed e a lista de noticias que foram adicionado ao feed.
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Título: {feed.titulo}</Text>

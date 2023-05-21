@@ -6,8 +6,10 @@ import { Feather } from '@expo/vector-icons';
 const IndexScreen = ({ navigation }) => {
   const { state, deleteFeed } = useContext(FeedListContext);
   
+  //remove um feed
   const handleDeleteFeed = id => { deleteFeed(id); };
 
+  //foi adicionado um botão para adicionar um feed novo chamando o AddFeedScreen
   return (
     <View>
       <FlatList

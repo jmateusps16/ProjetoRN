@@ -1,5 +1,5 @@
 import createDataContext from './createDataContext';
-
+//adicionei o add e delete feed.
 const feedListReducer = (state, action) => {
   switch (action.type) {
     case 'add_feed':

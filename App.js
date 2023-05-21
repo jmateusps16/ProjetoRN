@@ -11,6 +11,7 @@ import AddItemFeedScreen from './src/screens/AddItemFeedScreen';
 const Stack = createStackNavigator();
 
 const App = () => {
+  //Utilizei o Navigator para navegar entre as telas
   return (
     <NavigationContainer>
       <Stack.Navigator>

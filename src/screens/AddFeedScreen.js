@@ -10,6 +10,7 @@ const AddFeedScreen = ({ navigation }) => {
   const [urlImagem, setUrlImagem] = useState('');
   const { addFeed } = useContext(FeedListContext);
 
+  //aqui valido as informações inseridas e é obrigatório informar o titulo, url e descrição.
   const onSubmit = () => {
     if (titulo && urlFeed && descricao) {
       const newFeed = {

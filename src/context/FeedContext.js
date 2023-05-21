@@ -1,5 +1,6 @@
 import createDataContext from './createDataContext';
 
+//ajustei para implementar o add e delete
 const feedReducer = (state, action) => {
   switch (action.type) {
     case 'fetch_items':
