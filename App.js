@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Provider as FeedProvider } from './src/context/FeedListContext';
+import { Provider as FeedListProvider } from './src/context/FeedListContext';
+import { Provider as FeedProvider } from './src/context/FeedContext';
 import IndexScreen from './src/screens/IndexScreen';
 import AddFeedScreen from './src/screens/AddFeedScreen';
 import ShowFeedScreen from './src/screens/ShowFeedScreen';
@@ -24,8 +25,10 @@ const App = () => {
 
 export default () => {
   return (
-    <FeedProvider>
-      <App />
-    </FeedProvider>
+    <FeedListProvider>
+      <FeedProvider>
+        <App />
+      </FeedProvider>
+    </FeedListProvider>
   );
 };
