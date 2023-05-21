@@ -1,12 +1,17 @@
 import React, { useContext } from 'react';
 import { View, Text, Button, ScrollView, StyleSheet } from 'react-native';
 import { Context as FeedListContext } from '../context/FeedListContext';
+import AddItemFeedScreen from './AddItemFeedScreen';
 
-const ShowFeedScreen = ({ route }) => {
+const ShowFeedScreen = ({ route, navigation }) => {
   const { state } = useContext(FeedListContext);
   const { id } = route.params;
 
   const feed = state.find((feed) => feed.id === id);
+
+  const addItem = () => {
+    navigation.navigate('AddItemFeed', { id });
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -14,9 +19,6 @@ const ShowFeedScreen = ({ route }) => {
       <Text style={styles.description}>Descrição: {feed.descricao}</Text>
       <Text style={styles.feedUrl}>URL do Feed: {feed.urlFeed}</Text>
       <Text style={styles.siteUrl}>URL do Site: {feed.urlSite}</Text>
-
-      <Button title="Editar Feed" onPress={() => {}} />
-
       <Text style={styles.sectionTitle}>Noticias:</Text>
       {feed.items.map((item) => (
         <View key={item.id} style={styles.itemContainer}>
@@ -25,6 +27,9 @@ const ShowFeedScreen = ({ route }) => {
           <Text style={styles.itemDescription}>{item.dataPublicacao}</Text>
         </View>
       ))}
+      {feed && (
+        <Button title="Adicionar Item" onPress={addItem} />
+      )}
     </ScrollView>
   );
 };
